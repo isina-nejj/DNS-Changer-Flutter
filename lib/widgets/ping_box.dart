@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/dns_status.dart';
+import '../styles/app_styles.dart';
 
 /// ویجت نمایش وضعیت پینگ
 class PingBox extends StatelessWidget {
@@ -13,8 +14,8 @@ class PingBox extends StatelessWidget {
     Key? key,
     this.status,
     this.onTap,
-    this.width = 80,
-    this.height = 40,
+    this.width = AppSizes.pingBoxWidth,
+    this.height = AppSizes.pingBoxHeight,
     this.isLoading = false,
   }) : super(key: key);
 
@@ -22,17 +23,17 @@ class PingBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(AppSizes.radiusM),
       child: Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
           color: _getBackgroundColor(),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppSizes.radiusM),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 4,
+              color: AppColors.shadow,
+              blurRadius: AppSizes.spaceXS,
               offset: const Offset(0, 2),
             ),
           ],
@@ -40,19 +41,19 @@ class PingBox extends StatelessWidget {
         child: Center(
           child: isLoading
               ? SizedBox(
-                  width: 16,
-                  height: 16,
+                  width: AppSizes.iconS,
+                  height: AppSizes.iconS,
                   child: CircularProgressIndicator(
-                    strokeWidth: 2,
+                    strokeWidth: AppSizes.borderMedium,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      Colors.white.withOpacity(0.8),
+                      AppColors.textWhite.withValues(alpha: 0.8),
                     ),
                   ),
                 )
               : Text(
                   _getDisplayText(),
-                  style: TextStyle(
-                    color: Colors.white,
+                  style: AppTextStyles.bodySmall.copyWith(
+                    color: AppColors.textWhite,
                     fontWeight: FontWeight.bold,
                     fontSize: _getFontSize(),
                   ),
@@ -63,8 +64,8 @@ class PingBox extends StatelessWidget {
   }
 
   Color _getBackgroundColor() {
-    if (isLoading) return Colors.grey.shade400;
-    return status?.backgroundColor ?? Colors.grey.shade300;
+    if (isLoading) return AppColors.statusUnknown;
+    return status?.backgroundColor ?? AppColors.backgroundGrey;
   }
 
   String _getDisplayText() {
@@ -100,11 +101,11 @@ class LabeledPingBox extends StatelessWidget {
       children: [
         Text(
           label,
-          style: Theme.of(
-            context,
-          ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
+          style: AppTextStyles.bodySmall.copyWith(
+            color: AppColors.textSecondary,
+          ),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: AppSizes.spaceXS),
         PingBox(status: status, onTap: onTap, isLoading: isLoading),
       ],
     );
@@ -147,20 +148,22 @@ class PingStatsWidget extends StatelessWidget {
         : 0.0;
 
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(AppSizes.paddingM),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.shade300),
+        color: AppColors.backgroundLight,
+        borderRadius: BorderRadius.circular(AppSizes.radiusM),
+        border: Border.all(color: AppColors.cardBorder),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'آمار پینگ: $dnsAddress',
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: AppTextStyles.bodyMedium.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSizes.spaceS),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -179,11 +182,14 @@ class PingStatsWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(label, style: const TextStyle(fontSize: 10, color: Colors.grey)),
-        const SizedBox(height: 2),
+        Text(
+          label,
+          style: AppTextStyles.caption.copyWith(color: AppColors.textLight),
+        ),
+        const SizedBox(height: AppSizes.spaceXS),
         Text(
           value,
-          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+          style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold),
         ),
       ],
     );

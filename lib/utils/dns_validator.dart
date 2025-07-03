@@ -19,6 +19,11 @@ class DnsValidator {
     return true;
   }
 
+  /// بررسی معتبر بودن آدرس IP (همان isValidDns)
+  static bool isValidIp(String value) {
+    return isValidDns(value);
+  }
+
   /// بررسی آدرس IP خصوصی
   static bool isPrivateIp(String ip) {
     if (!isValidDns(ip)) return false;
