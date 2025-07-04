@@ -3,7 +3,7 @@
   <img src="https://raw.githubusercontent.com/isina-nejj/DNS-Changer-Flutter/main/assets/banner.png" alt="DNS Changer Flutter" width="600"/>
 </p>
 
-<h1 align="center">تغییر دهنده DNS (دنس چنجر) — اندروید</h1>
+<h1 align="center">تغییر دهنده DNS  — اندروید</h1>
 
 <p align="center">
   <b>اپلیکیشن حرفه‌ای و متن‌باز برای تغییر DNS سیستم اندروید با استفاده از VPN محلی. سریع، امن، بدون نیاز به روت و با حفظ حریم خصوصی.</b>
